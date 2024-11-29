@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="market.css">
+</head>
+<body>
+   <div class="header">
+       
+       <a href="index.html"><img src="back.png" alt=""></a>
+       <p>Market Place</p>
+        
+   </div>
+   <!-- this is a post header-->
+   <div class="post">
+       <!-- the photos and profile name inside header-->
+       <div class="postlogo">
+           <img src="logo.png" alt="">
+       <p>Asararu Zallah</p>
+       <h6>Admin</h6>
+       </div>
+       <!-- post text -->
+       <p class="posttext"> <b>SHASHIN SAYE DA SAYARWA</b><br><br>
+
+A wannan shafin zamuke TALLATA MUKU KAYAN ASARARU, irinsu sabulun jalabi, turaren jalabi, da sauran kayan da ake siyarwa.
+ 
+ </p>
+       <img src="logo.png" alt="">
+ <!-- the button all inside header-->
+       
+       </div>
+       <div class="button" onclick="messageMe()">
+           <button>Send Us A Message </button>
+       </div>
+       
+       <!-- another post goes here-->
+       
+       <!-- javascript goes here-->
+       <script>
+           var button = document.querySelector(".button");
+         button.addEventListener("click", messageMe);
+         
+        function messageMe(){
+          button = window.open("https://wwww.google.com");   
+             
+         } 
+           
+           history.back();      
+           </script>
+       
+</body>
+</html>
