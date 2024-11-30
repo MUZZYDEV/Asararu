@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="defaultz.css">
+</head>
+<body>
+ <!-- this is a post header-->
+   <div class="post">
+       <!-- the photos and profile name inside header-->
+       <div class="postlogo">
+           <img src="logo.png" alt="">
+       <p>Asararu Zallah</p>
+       <h6>Admin</h6>
+       </div>
+       <!-- post text -->
+       <p class="posttext"> <b>SHASHIN ILIMIN HISAB</b><br><br>
+
+A wannan shafin zamuke kawo muku karattuka na manyan malamai da ya shafi ilimin hisabi insha Allahu
+ 
+ </p>
+       <img src="logo.png" alt="">
+ <!-- the button all inside header-->
+       
+       </div>
+       <div class="button">
+           <button onclick="messageMe()">Send Us A Message </button>
+       </div>
+       
+       <!-- another post goes here-->
+       
+       <!-- JavaScript Goes Here -->
+       <script>
+                var button = document.querySelector(".button");
+         button.addEventListener("click", messageMe);
+         
+        function messageMe(){
+          button = window.open("https://wa.link/pdhf9z");
+          
+             
+         }                  
+           </script>
+</body>
+</html>
