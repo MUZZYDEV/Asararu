@@ -1,0 +1,60 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+   text-decoration: none;
+   }
+  body{
+       background-color: hsla(0, 0%, 50%, 0.15);
+   }
+ .post{
+        padding: 20px;
+        margin-top: 10px;
+        background-color: white;
+        border-bottom: 4.5px solid #C5C6C7; 
+        background: white;     
+         }
+   .post img{
+       width: 100%;
+       height: 100%;
+       margin-top: 10px;
+          }
+   .postlogo{
+       padding: 20px;
+       background-color: white;
+       display: block;
+       text-align: right;               } 
+   .postlogo img{
+       width: 55px;
+       height: 55px;
+       float: left;
+       border-radius: 50px;
+       border: 2px solid #C5C6C7;    
+        }
+       .postlogo p{
+           text-align: right;
+           margin-right: 150px;
+           margin-top: 15px;
+           font-weight: 1000;
+           }
+        .postlogo h6{
+           text-align: right;
+           font-weight: 400;
+           margin-right: 230px;
+           font-size: 12px;
+           color: gray;
+           }
+       .posttext{
+           margin-top: 20px;
+       }
+    .button button{
+         width: 90%;
+         height: 50px;
+         margin-right: auto;
+         margin-left: auto;
+         display: block;
+         border: none;
+         background: hsla(120, 100%, 25.1%, 0.5);
+         border-radius: 10px;
+         margin-top: 20px;
+     }
