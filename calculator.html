@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="calculator.js">
+</head>
+<style>
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+   text-decoration: none;
+   }
+   .header{
+       background-color: skyblue;
+       padding: 20px;
+       top: 0;
+       position: sticky;
+   }
+   .inputs{
+       margin-top: 20px;
+       text-align: center;
+       
+          }
+   .inputs input{
+       width: 80%;
+       height: 35px;
+       margin-left: auto;
+       margin-right: auto;
+       display: block;
+   }
+   .inputs button{
+       width: 80%;
+       height: 35px;
+       margin-left: auto;
+       margin-right: auto;
+       display: block;
+       background: skyblue;
+       border: none;
+       border-radius: 10px;       
+              }
+       .result{
+           padding: 20px;
+           border-radius: 20px;
+           background: skyblue;
+           margin-top: 20px;
+           margin: 10px;
+           display: none;
+             }
+       .result h3{
+           color: white;
+       }
+        .result p{
+            margin-bottom: px;
+            font-weight: 1000;
+            color: darkred;
+        }
+ </style>
+<body>
+    <div class="header">
+        <h1>Duba abunda ya shafi burujinku</h1>
+    </div>
+    <div class="inputs">
+        <label>Sanya nambar burujinka: (daga 1 zuwa 12)</label>
+        <input type="text" placeholder="Misali 1" id="input"><br>
+        <button id="button">Submit</button>
+    </div>
+    <div class="result">
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        var button = document.getElementById("button");
+button.addEventListener("click", function(){
+var inputs = document.getElementById("input").value
+var display = document.querySelector(".result")
+
+    if(inputs === "1"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Himlu<br>حمل<br><br> <h3>Dali'i:</h3>Murrikh<br>مريخ<br><br> <h3>Ranar Sa'ar dali'i:</h3>Talata<br><br><h3>Nambar Sa'ar Buruji:</h3>1 and 9<br><br> <h3>Kalar buruji:</h3>Red.<br><br> <h3>Dutsen Sa'a:</h3>Diamond<br><br> <h3>Sunan Allah:</h3>Ya Maliku Ya Quddusu(261)<br>A fara wuridin ranar talata <br><br> <h3>Dabi'ar Buruji:</h3>Nari (Wuta)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "2"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Sauru<br>ثور<br><br> <h3>Dali'i:</h3>Zahra<br> زهرة<br><br> <h3>Ranar Sa'ar dali'i:</h3>Alhamis<br><br><h3>Nambar Sa'ar Buruji:</h3>6 and 4<br><br> <h3>Kalar buruji:</h3>Maroon.<br><br> <h3>Dutsen Sa'a:</h3>Emerald<br><br> <h3>Sunan Allah:</h3>Ya Ganiyyu Ya Wahabu(1171)<br>A fara wuridin ranar talata <br><br> <h3>Dabi'ar Buruji:</h3> Turabi (Kasa)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+  else if(inputs === "3"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Jauza'a<br>جوزاء<br><br> <h3>Dali'i:</h3>Udaridu<br>عطارد<br><br> <h3>Ranar Sa'ar dali'i:</h3>Laraba<br><br><h3>Nambar Sa'ar Buruji:</h3>5 and 9<br><br> <h3>Kalar buruji:</h3>Yellow.<br><br> <h3>Dutsen Sa'a:</h3>Agates<br><br> <h3>Sunan Allah:</h3>Ya Aliyu Ya Azimu(1130)<br>A fara wuridin ranar talata <br><br> <h3>Dabi'ar Buruji:</h3> Hawa'i (Iska)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+   else if(inputs === "4"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Surdanu<br>سرطان<br><br> <h3>Dali'i:</h3>Qamar<br>قمر<br><br> <h3>Ranar Sa'ar dali'i:</h3>Litinin<br><br><h3>Nambar Sa'ar Buruji:</h3>3 and 7<br><br> <h3>Kalar buruji:</h3>Sea green da Silver<br><br> <h3>Dutsen Sa'a:</h3>Pearl.<br><br> <h3>Sunan Allah:</h3>Ya  Rahmanu Ya Rahimu(556)<br>A fara wuridin ranar talata <br><br> <h3>Dabi'ar Buruji:</h3> Ma'i (Ruwa)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+   else if(inputs === "5"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Asadu<br>اسد<br><br> <h3>Dali'i:</h3>Murrikh<br>مريج<br><br> <h3>Ranar Sa'ar dali'i:</h3>Talata<br><br><h3>Nambar Sa'ar Buruji:</h3>8 and 9<br><br> <h3>Kalar buruji:</h3>Gold da Orange.<br><br> <h3>Dutsen Sa'a:</h3>Rubby<br><br> <h3>Sunan Allah:</h3>Ya Hayyu Ya Qayyum(174)<br>A fara wuridin ranar talata <br><br> <h3>Dabi'ar Buruji:</h3> Nari (Wuta)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "6"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Sunbula<br>سنبلة<br><br> <h3>Dali'i:</h3>Udarid<br>عطارد<br><br> <h3>Ranar Sa'ar dali'i:</h3>Laraba<br><br><h3>Nambar Sa'ar Buruji:</h3>5 and 3<br><br> <h3>Kalar buruji:</h3>Navy Blue da Gray<br><br> <h3>Dutsen Sa'a:</h3>Sapphire<br><br> <h3>Sunan Allah:</h3>Ya Aliyi Ya Azimu(1130)<br>A fara wuridin ranar Laraba <br><br> <h3>Dabi'ar Buruji:</h3> Turabi (Kasa)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "7"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Mizanu<br>ميزان<br><br> <h3>Dali'i:</h3>Zahra<br>زهرة<br><br> <h3>Ranar Sa'ar dali'i:</h3>Jama'a<br><br><h3>Nambar Sa'ar Buruji:</h3>6 and 9<br><br> <h3>Kalar buruji:</h3>Blue da lavender.<br><br> <h3>Dutsen Sa'a:</h3>Opal<br><br> <h3>Sunan Allah:</h3>Ya Ganiyu Ya Wahabu(1171)<br>A fara wuridin ranar Juma'a<br><br> <h3>Dabi'ar Buruji:</h3> Hawa'i (Iska)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "8"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Aqarabu<br>عقرب<br><br> <h3>Dali'i:</h3>Murrikh<br>مريخ<br><br> <h3>Ranar Sa'ar dali'i:</h3>Talata<br><br><h3>Nambar Sa'ar Buruji:</h3>2 and 4<br><br> <h3>Kalar buruji:</h3>Maroon.<br><br> <h3>Dutsen Sa'a:</h3>Topaz<br><br> <h3>Sunan Allah:</h3>Ya Maliku Ya Quddusu(261)<br>A fara wuridin ranar talata <br><br> <h3>Dabi'ar Buruji:</h3> Ma'i (Ruwa)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "9"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Qausu<br>قوس<br><br> <h3>Dali'i:</h3>Mushtari<br>مشترى<br><br> <h3>Ranar Sa'ar dali'i:</h3>Alhamis<br><br><h3>Nambar Sa'ar Buruji:</h3> 5 and 7 <br><br> <h3>Kalar buruji:</h3>Purple.<br><br> <h3>Dutsen Sa'a:</h3>Turquoise<br><br> <h3>Sunan Allah:</h3>Ya Kabiru Ya Muta'ali(773)<br>A fara wuridin ranar Alhamis<br><br> <h3>Dabi'ar Buruji:</h3> Nari (Wuta)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "10"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Jadyu<br>جدى<br><br> <h3>Dali'i:</h3>Zuhal <br>زحل<br><br> <h3>Ranar Sa'ar dali'i:</h3>Asabar<br><br><h3>Nambar Sa'ar Buruji:</h3>2 and 8<br><br> <h3>Kalar buruji:</h3>Dark Green da Brown.<br><br> <h3>Dutsen Sa'a:</h3>Garnet. <br>Yana karawa mutum masoya da kwarjini<br><br> <h3>Sunan Allah:</h3>Ya Razzaqu Ya fattahu(797)<br>A fara wuridin ranar Asabar <br><br> <h3>Dabi'ar Buruji:</h3> Turabi (Kasa)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "11"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Dalwu<br>دلو<br><br> <h3>Dali'i:</h3>Zuhal <br>زحل<br><br> <h3>Ranar Sa'ar dali'i:</h3>Asabar<br><br><h3>Nambar Sa'ar Buruji:</h3> 1 and 7 <br><br> <h3>Kalar buruji:</h3>Electric blue<br>Kalan sararrin samaniya.<br><br> <h3>Dutsen Sa'a:</h3> Amethyst<br><br> <h3>Sunan Allah:</h3>Ya Razzaqu Ya fattahu(797)<br>A fara wuridin ranar Asabar <br><br> <h3>Dabi'ar Buruji:</h3> Hawa'i (Iska)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else if(inputs === "12"){
+    var result = document.getElementById("result");
+        result.innerHTML = "<h3>Sunan Buruji:</h3>Hutu<br>حوت<br><br> <h3>Dali'i:</h3>Mushtari <br>مشترى<br><br> <h3>Ranar Sa'ar dali'i:</h3>Alhamis<br><br><h3>Nambar Sa'ar Buruji:</h3> 2 and 6 <br><br> <h3>Kalar buruji:</h3>Pale Green<br><br> <h3>Dutsen Sa'a:</h3>Aquamarine<br><br> <h3>Sunan Allah:</h3>Ya Kabiru Ya Muta'ali(773)<br>A fara wuridin ranar Alhamis <br><br> <h3>Dabi'ar Buruji:</h3> Hawa'i (Iska)<br><br><br> Wanda ke bukatar a fitar masa da hatimin sunan Allah ya tuntube mu ta layin nan 09075635776";
+        display.style.display = "block";
+    }
+    else{
+      alert("Ba'a sanya nambar dai dai ba, iya namba ake bukata daga 1 zuwa 12");
+    }
+})
+    </script>
+</body>
+</html>
