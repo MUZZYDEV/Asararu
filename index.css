@@ -64,21 +64,29 @@
        border: 10px solid hsla(120, 100%, 25.1%, 0.08);
        border-radius: 15px;      
   }
-  .talla{
+  .talla1{
+      margin-left: auto;
+       margin-right: auto;
+       display: block;
+  }
+  .talla3{
       background: white;
       padding: 5px;
       margin: 10px;
       border-radius: 20px;
-        }
-  .talla img{
-      width: 90%;
-      height: 70px;
-      margin-left: auto;
+       margin-left: auto;
        margin-right: auto;
        display: block;
-       border-radius: 20px;
+               }
+  .talla3 img{
+      width: 110px;
+      height: 70px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      border-radius: 20px;
   }
-  .talla button{
+  .talla3 button{
       margin-left: auto;
        margin-right: auto;
        display: block;
@@ -158,5 +166,14 @@
    .footer a{
        color: black;
    }
-   
+   .talla2{
+     display: grid;
+       grid-template-columns: auto auto;
+       margin-left: auto;
+       margin-right: auto;
+       gap: 25px;
+       padding: 15px;
+       font-weight: 300;
+       font-size: 15px;  
+   }
            
