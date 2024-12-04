@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page title</title>
+</head>
+<style>
+    * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+   text-decoration: none;
+   }
+   .header{
+       padding: 15px;
+       background: lightblue;
+       text-align: center;
+   }
+   .calheader{
+       padding: 15px;
+       border-radius: 40px;
+       background: lightblue;
+       margin-left: auto;
+       margin-right: auto;
+       margin-top: 20px;
+       display: block;
+       margin: 20px;
+       text-align: center;
+          }
+   .calheader input{
+       margin-left: auto;
+       margin-right: auto;
+       display: block;
+       border-radius: 40px;
+       width: 100%;
+       height: 70px;
+   }
+   .result{
+       padding: 15px;
+       background: lightblue;
+       margin-left: auto;
+       margin-right: auto;
+       margin-top: 20px;
+       display: block;
+       margin: 20px;
+       text-align: center;
+   }
+   .result fieldset{
+       height: 100px;
+       font-size: 35px;
+       font-weight: 1000;       
+   }
+</style>
+<body>
+    <div class="header">
+        <h1>HISABUL JUMAL</h1>
+        <p>Duk harafi ko aya na Alqur'ani ko sunanku da kuka rubuta da larabci zai baku adadin su Insha Allah (Misali الله)</p>
+    </div>
+    <div class="calheader">
+    <input type="text" id="input" placeholder="Rubuta anan (Misali محمد) " dir="rtl">
+    </div>
+    <div class="result">
+        <fieldset>
+        <legend>Adadi:</legend>
+        <p id="result" style="color: red">0</p>
+        </fieldset>
+    </div>
+    
+    
+        <script>
+            
+            
+            
+            
+                    
+        
+        input.addEventListener("keyup", function(){
+        const input = document.getElementById("input");
+         const result = document.getElementById("result");
+        let word = {
+                ا: 1,
+                ب: 2,
+                ج: 3,
+                د: 4,
+                ه: 5,
+                و: 6,
+                ز: 7,
+                ح: 8,
+                ط: 9,
+                ي: 10,
+                ك: 20,
+                ل: 30,
+                م: 40,
+                ن: 50,
+                س: 60,
+                ع: 70,
+                ف: 80,
+                ص: 90,
+                ق: 100,
+                ر: 200,
+                ش: 300,
+                ت: 400,
+                ث: 500,
+                خ: 600,
+                ذ: 700,
+                ض: 800,
+                ظ: 900,
+                غ: 1000,
+                ء: 1,
+                ى: 1,
+                ؤ: 1,
+                ئ: 1
+                
+            }
+        
+          
+             
+                let total = 0;
+                const inputValue = input.value;                      for (let char of inputValue) { if (char in word) { 
+                 total += word[char];
+                 } 
+                  } 
+                   result.innerHTML = total; 
+                
+                
+                        
+            
+        });
+        
+    </script>
+</body>
+</html>
