@@ -77,7 +77,6 @@
        margin-left: auto;
        margin-right: auto;
        box-sizing: border-box;
-       flex-shrink: 0;
                }
   .talla3 img{
       width: 80px;
