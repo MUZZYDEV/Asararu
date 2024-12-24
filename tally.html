@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally Counter - Asma'ul Husna with Hisabul Jumal</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #003366;
+        }
+
+        #asma-ul-husna {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .counter-item {
+            background-color: #e0f7fa;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 160px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .counter-item h3 {
+            color: #003366;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .reset-btn {
+            background-color: #d32f2f;
+            margin-top: 10px;
+        }
+
+        .reset-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        .jumal-value {
+            font-size: 1em;
+            margin-top: 5px;
+            color: #003366;
+        }
+
+        .dua-section {
+            background-color: #b2dfdb;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+            color: #003366;
+        }
+
+        .dua-section h4 {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .dua-text {
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .dua-button {
+            background-color: #004d40;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .dua-button:hover {
+            background-color: #00332e;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tally Counter - Asma'ul Husna</h1>
+        <div id="asma-ul-husna">
+            <!-- Each name and its counter will be dynamically generated here -->
+        </div>
+    </div>
+
+    <script>
+        // List of Asma'ul Husna with their corresponding Hisabul Jumal values and duas
+        const asmaUlHusna = [
+            { name: "Ar-Rahman", jumal: 249, dua: "Ya Rahmanu, irhamni." },
+            { name: "Ar-Rahim", jumal: 238, dua: "Ya Rahimu, latif li." },
+            { name: "Al-Malik", jumal: 230, dua: "Ya Malik, hiddilna." },
+            { name: "Al-Quddus", jumal: 123, dua: "Ya Quddusu, at-tahiru li." },
+            { name: "As-Salam", jumal: 91, dua: "Ya Salam, salamati lik." },
+            { name: "Al-Mu’min", jumal: 125, dua: "Ya Mu’min, amni bil iman." },
+            { name: "Al-Muhaymin", jumal: 148, dua: "Ya Muhaymin, huzi mana." },
+            { name: "Al-Aziz", jumal: 212, dua: "Ya Aziz, quwwati fiik." },
+            { name: "Al-Jabbar", jumal: 273, dua: "Ya Jabbar, faqqi al-haja." },
+            { name: "Al-Mutakabbir", jumal: 444, dua: "Ya Mutakabbir, a'la qudratika." },
+            { name: "Al-Khaliq", jumal: 259, dua: "Ya Khaliq, ibtidi'ni." },
+            { name: "Al-Bari’", jumal: 202, dua: "Ya Bari’u, islahni." },
+            { name: "Al-Musawwir", jumal: 195, dua: "Ya Musawwir, husni fi amri." },
+            { name: "Al-Ghaffar", jumal: 305, dua: "Ya Ghaffar, aghfir li." },
+            { name: "Al-Qahhar", jumal: 337, dua: "Ya Qahhar, qudrati al-‘adham." },
+            { name: "Al-Wahhab", jumal: 225, dua: "Ya Wahhab, manni bima warakt." },
+            { name: "Ar-Razzaq", jumal: 271, dua: "Ya Razzaq, riski bika." },
+            { name: "Al-Fattah", jumal: 335, dua: "Ya Fattah, iftah li fi amri." },
+            { name: "Al-`Alim", jumal: 238, dua: "Ya `Alim, ilmuka wa barakatuk." },
+            { name: "Al-Qabid", jumal: 156, dua: "Ya Qabid, wahidni." },
+            { name: "Al-Basit", jumal: 271, dua: "Ya Basit, ra'fatika wa rahmatik." },
+            { name: "Al-Khafid", jumal: 169, dua: "Ya Khafid, akhfi wa sa'ada." },
+            { name: "Ar-Rafi`", jumal: 238, dua: "Ya Rafi', ruhi ila ajmak." },
+            { name: "Al-Mu`izz", jumal: 226, dua: "Ya Mu’izz, izzah li fi sirri." },
+            { name: "Al-Muzil", jumal: 169, dua: "Ya Muzil, sunna li." },
+            { name: "As-Sami`", jumal: 238, dua: "Ya Sami', istajibu li." },
+            { name: "Al-Basir", jumal: 242, dua: "Ya Basir, nabra'uk fi." },
+            { name: "Al-Hakam", jumal: 233, dua: "Ya Hakam, islahni wa hukmuka." },
+            { name: "Al-`Adl", jumal: 109, dua: "Ya `Adl, dalil li amr." },
+            { name: "Al-Latif", jumal: 177, dua: "Ya Latif, nasha' li." },
+            { name: "Al-Khabir", jumal: 239, dua: "Ya Khabir, alimi fi ma'ruf." },
+            { name: "Al-Halim", jumal: 164, dua: "Ya Halim, rahamtika ya Rabb." },
+            { name: "Al-Azim", jumal: 307, dua: "Ya Azim, ijabi amali." },
+            { name: "Al-Ghafur", jumal: 273, dua: "Ya Ghafur, aghfir li wa li walidi." },
+            { name: "Ash-Shakur", jumal: 162, dua: "Ya Shakur, jazaka al-jaza." },
+            { name: "Al-`Aliyy", jumal: 320, dua: "Ya `Aliyy, rafa'ni." },
+            { name: "Al-Kabir", jumal: 379, dua: "Ya Kabir, tazim wa ajr." },
+            { name: "Al-Hafiz", jumal: 250, dua: "Ya Hafiz, hifzuka." },
+            { name: "Al-Muqit", jumal: 315, dua: "Ya Muqit, quwwati fi zaka." },
+            { name: "Al-Hasib", jumal: 255, dua: "Ya Hasib, hasibu amri." },
+            { name: "Al-Jalil", jumal: 271, dua: "Ya Jalil, jalaltuka wa karam." },
+            { name: "Al-Karim", jumal: 440, dua: "Ya Karim, barakatuka wa rahmatika." },
+            { name: "Ar-Raqib", jumal: 283, dua: "Ya Raqib, ilmi fi'n-nahdah." },
+            { name: "Al-Mujib", jumal: 200, dua: "Ya Mujib, da'awatika wa 'insafi." },
+            { name: "Al-Wasi`", jumal: 317, dua: "Ya Wasi`, wasi'ati li." },
+            { name: "Al-Hakim", jumal: 249, dua: "Ya Hakim, hikmati fi'amali." },
+            { name: "Al-Wadud", jumal: 179, dua: "Ya Wadud, lutfika wa hubbika." },
+            { name: "Al-Majid", jumal: 155, dua: "Ya Majid, barakatika fi dhikri." },
+            { name: "Al-Ba`ith", jumal: 232, dua: "Ya Ba`ith, jaddid amali." },
+            { name: "Ash-Shahid", jumal: 379, dua: "Ya Shahid, shuhuduhu fi nafs." },
+            { name: "Al-Haqq", jumal: 234, dua: "Ya Haqq, ja'ali fi'amali." },
+            { name: "Al-Wakil", jumal: 221, dua: "Ya Wakil, tawakkaltu." },
+            { name: "Al-Qawiyy", jumal: 284, dua: "Ya Qawiyy, quwwati fi amri." },
+            { name: "Al-Matin", jumal: 281, dua: "Ya Matin, thamani fi as-sabir." },
+            { name: "Al-Waliyy", jumal: 229, dua: "Ya Waliyy, unqadhni." },
+            { name: "Al-Hamid", jumal: 231, dua: "Ya Hamid, tadhakarni." },
+            { name: "Al-Muhsi", jumal: 265, dua: "Ya Muhsi, ihsani." },
+            { name: "Al-Mubdi'", jumal: 244, dua: "Ya Mubdi', islah li." },
+            { name: "Al-Mu`id", jumal: 320, dua: "Ya Mu`id, ma'ia fi nafs." },
+            { name: "Al-Muhyi", jumal: 305, dua: "Ya Muhyi, a'ishni fi dunya." },
+            { name: "Al-Mumit", jumal: 240, dua: "Ya Mumit, ruhi fi'amri." },
+            { name: "Al-Hayy", jumal: 261, dua: "Ya Hayy, dumu fi nafs." },
+            { name: "Al-Qayyum", jumal: 328, dua: "Ya Qayyum, nashrah fi sirri." }
+        ];
+
+        // Initialize counters
+        let counters = new Array(asmaUlHusna.length).fill(0);
+
+        // Generate HTML dynamically
+        const asmaContainer = document.getElementById("asma-ul-husna");
+
+        asmaUlHusna.forEach((asma, index) => {
+            const counterItem = document.createElement("div");
+            counterItem.classList.add("counter-item");
+
+            const nameTitle = document.createElement("h3");
+            nameTitle.textContent = asma.name;
+
+            const jumalValue = document.createElement("p");
+            jumalValue.classList.add("jumal-value");
+            jumalValue.textContent = `Hisabul Jumal: ${asma.jumal}`;
+
+            const counterDisplay = document.createElement("div");
+            counterDisplay.classList.add("counter");
+
+            const count = document.createElement("span");
+            count.id = `count-${index}`;
+            count.textContent = counters[index];
+
+            const incrementBtn = document.createElement("button");
+            incrementBtn.textContent = "+";
+            incrementBtn.onclick = () => updateCounter(index, 1);
+
+            const decrementBtn = document.createElement("button");
+            decrementBtn.textContent = "-";
+            decrementBtn.onclick = () => updateCounter(index, -1);
+
+            const resetBtn = document.createElement("button");
+            resetBtn.textContent = "Reset";
+            resetBtn.classList.add("reset-btn");
+            resetBtn.onclick = () => resetCounter(index);
+
+            // Dua Section
+            const duaSection = document.createElement("div");
+            duaSection.classList.add("dua-section");
+
+            const duaTitle = document.createElement("h4");
+            duaTitle.textContent = "Addu'a:";
+            const duaText = document.createElement("p");
+            duaText.classList.add("dua-text");
+            duaText.textContent = asma.dua;
+
+            const duaButton = document.createElement("button");
+            duaButton.classList.add("dua-button");
+            duaButton.textContent = "Bada Addu'a";
+            duaButton.onclick = () => alert(`Addu'a don ${asma.name}: ${asma.dua}`);
+
+            duaSection.appendChild(duaTitle);
+            duaSection.appendChild(duaText);
+            duaSection.appendChild(duaButton);
+
+            counterDisplay.appendChild(incrementBtn);
+            counterDisplay.appendChild(count);
+            counterDisplay.appendChild(decrementBtn);
+
+            counterItem.appendChild(nameTitle);
+            counterItem.appendChild(jumalValue);
+            counterItem.appendChild(counterDisplay);
+            counterItem.appendChild(resetBtn); // Add the reset button here
+            counterItem.appendChild(duaSection); // Add the dua section
+
+            asmaContainer.appendChild(counterItem);
+        });
+
+        // Update counter and display
+        function updateCounter(index, value) {
+            counters[index] += value;
+            document.getElementById(`count-${index}`).textContent = counters[index];
+        }
+
+        // Reset counter for a specific Asma'ul Husna
+        function resetCounter(index) {
+            counters[index] = 0;
+            document.getElementById(`count-${index}`).textContent = counters[index];
+        }
+    </script>
+</body>
+</html>
