@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Posting and Commenting with Like Control</title>
+    <style>
+        /* General page style */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .upload-section, .post-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-section input[type="file"] {
+            display: none;
+        }
+
+        .upload-section label {
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-section img {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 20px;
+        }
+
+        .post-section textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .post-section button {
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .post-section button:hover {
+            background-color: #004d40;
+        }
+
+        .posts {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .like-comment-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .like-button, .comment-button {
+            cursor: pointer;
+            background-color: #00796b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .like-button:hover, .comment-button:hover {
+            background-color: #004d40;
+        }
+
+        .comments {
+            margin-top: 10px;
+        }
+
+        .comment {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lets Chat</h1>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <label for="imageUpload">Upload Image</label>
+            <input type="file" id="imageUpload" accept="image/*">
+            <img id="previewImage" style="display:none" />
+        </div>
+
+        <!-- Post Section -->
+        <div class="post-section">
+            <textarea id="postText" placeholder="Write something about the image..."></textarea>
+            <button id="postButton">Post</button>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="posts" id="postsContainer"></div>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById("imageUpload");
+        const previewImage = document.getElementById("previewImage");
+        const postText = document.getElementById("postText");
+        const postButton = document.getElementById("postButton");
+        const postsContainer = document.getElementById("postsContainer");
+
+        // Load posts from localStorage
+        window.onload = function() {
+            loadPosts();
+        };
+
+        // Preview the uploaded image
+        imageUpload.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    previewImage.style.display = "block";
+                    previewImage.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Post image and text
+        postButton.addEventListener("click", function() {
+            const imageSrc = previewImage.src;
+            const text = postText.value;
+
+            if (imageSrc && text) {
+                const post = {
+                    image: imageSrc,
+                    text: text,
+                    likes: 0,
+                    comments: [],
+                    likedBy: [] // to store users who liked the post
+                };
+
+                // Save post to localStorage
+                const posts = JSON.parse(localStorage.getItem("posts")) || [];
+                posts.push(post);
+                localStorage.setItem("posts", JSON.stringify(posts));
+
+                // Clear the fields after posting
+                previewImage.style.display = "none";
+                postText.value = "";
+                imageUpload.value = "";
+
+                // Reload posts
+                loadPosts();
+            }
+        });
+
+        // Load posts from localStorage
+        function loadPosts() {
+            postsContainer.innerHTML = "";
+            const posts = JSON.parse(localStorage.getItem("posts")) || [];
+            posts.forEach((post, index) => {
+                const postElement = document.createElement("div");
+                postElement.classList.add("post");
+                postElement.innerHTML = `
+                    <img src="${post.image}" />
+                    <p>${post.text}</p>
+                    <div class="like-comment-section">
+                        <button class="like-button" onclick="likePost(${index})">Like (${post.likes})</button>
+                        <button class="comment-button" onclick="toggleComments(${index})">Comments</button>
+                    </div>
+                    <div class="comments" id="comments-${index}" style="display:none">
+                        ${post.comments.map(comment => `<div class="comment">${comment}</div>`).join('')}
+                        <textarea id="commentInput-${index}" class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button onclick="addComment(${index})">Add Comment</button>
+                    </div>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // Like the post, ensuring a user can only like once
+        function likePost(index) {
+            const posts = JSON.parse(localStorage.getItem("posts")) || [];
+            const post = posts[index];
+            const userId = localStorage.getItem("userId"); // Get user ID from localStorage
+
+            // If the user has already liked the post, prevent them from liking again
+            if (!userId) {
+                alert("Please sign in to like the post.");
+                return;
+            }
+
+            if (post.likedBy.includes(userId)) {
+                alert("You have already liked this post.");
+                return;
+            }
+
+            // If the user hasn't liked yet, add them to the likedBy array
+            post.likes++;
+            post.likedBy.push(userId);
+            localStorage.setItem("posts", JSON.stringify(posts));
+
+            loadPosts();
+        }
+
+        // Generate a unique userId (for demo purposes)
+        function generateUserId() {
+            let userId = localStorage.getItem("userId");
+            if (!userId) {
+                userId = 'user' + Math.floor(Math.random() * 1000000);
+                localStorage.setItem("userId", userId);
+            }
+            return userId;
+        }
+
+        // Initialize userId on load
+        generateUserId();
+
+        // Toggle comments section
+        function toggleComments(index) {
+            const commentsSection = document.getElementById(`comments-${index}`);
+            commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
+        }
+
+        // Add comment to the post
+        function addComment(index) {
+            const commentInput = document.getElementById(`commentInput-${index}`);
+            const comment = commentInput.value;
+            if (comment) {
+                const posts = JSON.parse(localStorage.getItem("posts")) || [];
+                posts[index].comments.push(comment);
+                localStorage.setItem("posts", JSON.stringify(posts));
+                commentInput.value = "";
+                loadPosts();
+            }
+        }
+    </script>
+
+</body>
+</html>
