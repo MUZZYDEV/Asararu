@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manhajar Lissafin Kwan Aure</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+      direction: rtl;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h1>Musharakar Aure</h1>
+  <div class="form-container">
+    <input type="text" id="maleName" placeholder="Sunan Miji (Larabci kawai)">
+    <input type="text" id="femaleName" placeholder="Sunan Matar (Larabci kawai)">
+    <button onclick="calculateCompatibility()">Yi Lissafi</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    // Hisabul Jumal values for Arabic letters
+    const hisabulJumal = {
+      "ا": 1, "ب": 2, "ج": 3, "د": 4, "ه": 5, "و": 6, "ز": 7, "ح": 8, "ط": 9,
+      "ي": 10, "ك": 20, "ل": 30, "م": 40, "ن": 50, "س": 60, "ع": 70, "ف": 80, "ص": 90,
+      "ق": 100, "ر": 200, "ش": 300, "ت": 400, "ث": 500, "خ": 600, "ذ": 700, "ض": 800, "ظ": 900, "غ": 1000, "ى": 1, "ه": 5, "ؤ": 1, "ء": 1
+    };
+
+    // Function to calculate the Hisabul Jumal value of a name
+    function calculateJumal(name) {
+      let total = 0;
+      for (let char of name) {
+        if (hisabulJumal[char]) {
+          total += hisabulJumal[char];
+        }
+      }
+      return total;
+    }
+
+    // Reduce the number to a single digit
+    function reduceToSingleDigit(num) {
+      while (num > 9) {
+        num = num.toString().split("").reduce((acc, digit) => acc + parseInt(digit), 0);
+      }
+      return num;
+    }
+
+    // Determine the compatibility based on the result
+    function determineCompatibility(value) {
+      switch (value) {
+        case 1:
+          return "Auren bashida kyau kwata kwata, idan mace kaiwa binciken nauyin gidan zai dawo kanta, sannan idan namiji akai wa zaiyi talauci ta yadda matarshi ce za take taimaka mishi";
+        case 3:
+           return "Auren bashida kyau kwata kwata, Akwai talauci da tsiya aciki, sannan auren ana samun matsalar yan uwa ta bangaren mai tambaya";
+        case 6:
+           return "Auren bashida kyau kwata kwata, Akwai talauci da tsiya aciki, sannan auren ana samun matsala sosai, miji baya ciyar da matarshi sosai, kuma kotu ce take raba auren";
+        case 9:
+          return "Auren bai dace ba bashida kyau sam";
+        case 2:
+          return "Masha Allah, ina tayaka murna wannan auren yana da matukar kyau kuma aurene na budi da samun arziki, gaskiya na tayaka murna kwarai da gaske, Allah ya sanya Albarka aciki";
+        case 5:
+          return "Masha Allah, ina tayaka murna wannan auren yana da matukar kyau kuma aurene na budi da samun arziki akwai soyayya aciki, sannan akwai haihuwar yara sosai acikin auren sai dai arzikin wannan aure a hankali a hankali yake zuwa amma fa ana cin kwakwa kamun auren ya daidaitu, sai dai ba kowa bane yake fuskantar hakan, gaskiya na tayaka murna kwarai da gaske, Allah ya sanya Albarka aciki";
+        case 7:
+          return "Masha Allah, ina tayaka murna wannan auren yana da matukar kyau kuma aurene na budi da samun arziki, gaskiya na tayaka murna kwarai da gaske, Allah ya sanya Albarka aciki";
+        case 4:
+            return "Auren tsaka tsakiya a wurin wasu ma cewa sukeyi bashi da kyau sai dai gaskiya anfi dangantashi da tsaka tsaki ba yabo ba fallasa, wanda wasu suka ce aurene da ake gina gidaje ko mallakan filaye amma ana samun matsala daga mahaifiyar namijin ko mahifin shin";
+        case 8:
+          return "Auren yana tsaka-tsakine sai dai yanada kyau ga ma'aikatan gobnati ko ma'aikin makaranta malami kenan ko kuma dan siyasa";
+        default:
+          return "Ba a iya tantancewa.";
+      }
+    }
+
+    // Main function to calculate compatibility
+    function calculateCompatibility() {
+      const maleName = document.getElementById("maleName").value.trim();
+      const femaleName = document.getElementById("femaleName").value.trim();
+
+      // Check if input is valid Arabic text
+      const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+      if (!arabicRegex.test(maleName) || !arabicRegex.test(femaleName)) {
+        document.getElementById("result").innerText = "Don Allah shigar da sunayen cikin haruffan Larabci kawai!";
+        return;
+      }
+
+      // Calculate Hisabul Jumal for both names
+      const maleValue = calculateJumal(maleName);
+      const femaleValue = calculateJumal(femaleName);
+
+      // Combine values and add 7
+      let combinedValue = maleValue + femaleValue + 7;
+
+      // Reduce the combined value to a single digit
+      combinedValue = reduceToSingleDigit(combinedValue);
+
+      // Determine compatibility result
+      const compatibility = determineCompatibility(combinedValue);
+
+      // Display the result
+      document.getElementById("result").innerText = 
+        `Jimilla: ${combinedValue} \nSakamako: ${compatibility}`;
+    }
+  </script>
+</body>
+</html>
