@@ -1,107 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Page title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="defaults.css">
-</head>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monnify Payment Integration</title>
+  <script src="https://sdk.monnify.com/plugin/monnify.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 50px;
     }
- .header{
- padding: 20px;
- background: hsla(120, 100%, 25.1%, 0.5);
- border-bottom: 5px solid gray;
- 
-   }
-  .header h1{
-      font-family: Arial,Helvetica, sans-serif; background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent; -webkit-background-clip: text;
-    font-size: 30px;
-    text-align: left;
-  }
-  .father{
-       padding: 20px;
-       background: white;
-       display: block;
-       position: sticky;
-       bottom: 0;
-       gap: 20px;
-       text-align: center; 
-       color: black;   
-                }
-   .mother{
-       display: grid;
-       grid-template-columns: auto auto auto;
-       margin-left: auto;
-       margin-right: auto;
-       gap: 25px;
-       padding: 15px;
-       font-weight: 300;
-       font-size: 15px; 
-   }
-   .footer img{
-       width: 30px;
-       height: 30px;
-          margin-left: auto;
-       margin-right: auto;
-       display: block;
-       margin-top: 10px;
-       border: 7px solid hsla(120, 100%, 25.1%, 0.08);
-       border-radius: 15px;
-   }
-   .footer a{
-       color: black;
-   }
-   .taimakobody h5{
-       color: white;
-       
-   }   
-</style>
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #eef;
+      border-radius: 5px;
+    }
+  </style>
+</head>
 <body>
-    <div class="header">
-        <h1>SASHIN BADA TAIMAKO</h1>
-    </div>
-    <div class="taimakobody" style="background: tomato; margin-bottom: 20px; border-bottom: 5px solid gray;">
-        <h5 style="padding: 25px;">Ba'a kammala wannan manhajar ba har yanzu ana kan aiki a kanta, ga wayanda zasu iya bada gudumawar su dan a kara gina wannan manhajar muna maraba<br><br>
-        Zamuyi amfani da duk abunda kuka bayar wajen biyan kudin daura manhajar akan Playstore, sannan wajen sayen (Domain) domin daura shi akan website,<br><br> saboda sauran yan uwa musulmai su amfana, sannan hakan zai kara bawa manhajar samun wasu tsare tsare acikin sa, <br><br> Allah ya saka da alheri </h5><br>
-        <p style="text-align: center; color: yellow;">OPay 
-Bank:<br>
-OPay Digital Services Limited(OPay)<br>
-OPay Account:<br>
-9075635776 <br>
-Name: <br>
-MUAWIYA MUZEE UMAR</p>
-    </div>
-    <div>
-        
-    </div>
-    <div class="father">
-        <div class="mother">
-            <div class="footer">
-                <a href="audio.html"><img src="audio.png" alt="">
-                <p>Audio</p></a>
-            </div>
-             <div class="footer">
-               <a href="youtube.html"> <img src="youtube.png" alt="">
-                <p>Video</p></a>
-            </div>
-             <div class="footer">
-               <a href="taimako.html"> <img src="home.png" alt="">
-                <p>Home</p></a>
-                
-            </div>
-        </div>
-        <p style="Font-weight: 300; font-size: 10px;">©️ Asararu Zallah<br> Muawiyabinumar@gmail.com</p>
-    </div>
-    
-    <!-- JavaScript Goes Here -->
-       <script>
-           
+  <div class="container">
+    <h1>Monnify Payment</h1>
+    <p>Complete the form below to make a payment.</p>
+    <form id="paymentForm">
+      <input type="text" id="customerName" placeholder="Your Name" required>
+      <input type="email" id="customerEmail" placeholder="Your Email" required>
+      <input type="number" id="amount" placeholder="Amount (NGN)" required>
+      <button type="button" onclick="makePayment()">Pay Now</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
 
-                  
-           </script>
+  <script>
+    // Monnify Payment Function
+    function makePayment() {
+      const customerName = document.getElementById('customerName').value;
+      const customerEmail = document.getElementById('customerEmail').value;
+      const amount = document.getElementById('amount').value;
+
+      if (!customerName || !customerEmail || !amount) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      MonnifySDK.initialize({
+        amount: parseFloat(amount),
+        currency: "NGN",
+        reference: "TXN_" + Date.now(), // Unique transaction reference
+        customerName: customerName,
+        customerEmail: customerEmail,
+        apiKey: "MK_TEST_37TU0JWQS5", // Replace with your Monnify API Key
+        contractCode: "4461857308", // Replace with your Monnify Contract Code
+        paymentDescription: "Payment for services",
+        paymentMethods: ["CARD", "ACCOUNT_TRANSFER"], // Available payment methods
+        onComplete: function (response) {
+          // Handle payment completion
+          const resultDiv = document.getElementById("result");
+          if (response.paymentStatus === "PAID") {
+            resultDiv.innerHTML = `<p><strong>Payment Successful!</strong><br>Transaction Reference: ${response.transactionReference}</p>`;
+          } else {
+            resultDiv.innerHTML = `<p><strong>Payment Failed!</strong><br>Reason: ${response.responseMessage}</p>`;
+          }
+        },
+        onClose: function () {
+          alert("Payment process was closed.");
+        }
+      });
+    }
+  </script>
 </body>
 </html>
