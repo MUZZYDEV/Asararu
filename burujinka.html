@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lissafin Burujinka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: right;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .key {
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .key:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lissafin Burujinka</h1>
+        <input type="text" id="userName" placeholder="Shigar da sunanka(da larabcikawai!)">
+        <input type="text" id="motherName" placeholder="Sunan mahaifiyarka(da larabci kawai)">
+        <button onclick="calculateZodiac()">Lissafa Burujinka</button>
+        <div class="result" id="result"></div>
+
+        <div class="keyboard" id="keyboard">
+            <!-- Ana loda maballan keyboard a nan -->
+        </div>
+    </div>
+
+    <script>
+        // Darajojin Hisabul Jumal na Haruffan Larabci
+        const arabicValues = {
+            'ا': 1, 'ب': 2, 'ج': 3, 'د': 4, 'ه': 5, 'و': 6, 'ز': 7,
+            'ح': 8, 'ط': 9, 'ي': 10, 'ك': 20, 'ل': 30, 'م': 40,
+            'ن': 50, 'س': 60, 'ع': 70, 'ف': 80, 'ص': 90, 'ق': 100,
+            'ر': 200, 'ش': 300, 'ت': 400, 'ث': 500, 'خ': 600,
+            'ذ': 700, 'ض': 800, 'ظ': 900, 'غ': 1000,'ء':1 ,'ئ':1 ,'ؤ':1 ,'ى':1 , 'ة':5 ,
+        };
+
+        // Burujin Zodiac
+        const zodiacSigns = {
+            1: "Himlu, Shine buruji na daya",
+            2: "Taurus, Shine buruji na biyu",
+            3: "Jauza'a, Shine buruji na uku",
+            4: "Surdanu, Shine buruji na hudu",
+            5: "Asadu, Shine buruji na biyar",
+            6: "Sumbula, Shine buruji na shida",
+            7: "Mizanu, Shine buruji na bakwai",
+            8: "Aqarabu, Shine buruji na takwas",
+            9: "Qausu, Shine buruji na tara",
+            10: "Jadyu, Shine buruji na goma",
+            11: "Dalwu, Shine buruji na sha daya",
+            12: "Hutu, Shine buruji na sha biyu"
+        };
+
+        // Lissafin darajar suna
+        function calculateNameValue(name) {
+            let total = 0;
+            for (let char of name) {
+                if (arabicValues[char]) {
+                    total += arabicValues[char];
+                }
+            }
+            return total;
+        }
+
+        // Babban aikin don lissafin buruji
+        function calculateZodiac() {
+            const userName = document.getElementById('userName').value.trim();
+            const motherName = document.getElementById('motherName').value.trim();
+
+            if (!userName || !motherName) {
+                document.getElementById('result').textContent = "Da fatan za a saka sunan ka da sunan mahaifiyarka!";
+                return;
+            }
+
+            const totalValue = calculateNameValue(userName) + calculateNameValue(motherName);
+            let zodiacNumber = totalValue % 12;
+            zodiacNumber = zodiacNumber === 0 ? 12 : zodiacNumber;
+
+            const zodiac = zodiacSigns[zodiacNumber];
+            document.getElementById('result').textContent = `Burujinka shi ne: ${zodiac}`;
+        }
+
+        // Load Arabic keyboard
+        const arabicKeys = "ا ب ج د ه و ز ح ط ي ك ل م ن س ع ف ص ق ر ش ت ث خ ذ ض ظ غ ى ئ ء ؤ ة".split(" ");
+        const keyboard = document.getElementById("keyboard");
+        let activeInput = null;
+
+        // Add keys to keyboard
+        arabicKeys.forEach(key => {
+            const button = document.createElement("div");
+            button.classList.add("key");
+            button.textContent = key;
+            button.onclick = () => {
+                if (activeInput) {
+                    activeInput.value += key;
+                }
+            };
+            keyboard.appendChild(button);
+        });
+
+        // Detect active input field
+        document.getElementById("userName").onfocus = () => activeInput = document.getElementById("userName");
+        document.getElementById("motherName").onfocus = () => activeInput = document.getElementById("motherName");
+    </script>
+</body>
+</html>
