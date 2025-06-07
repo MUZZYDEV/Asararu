@@ -206,7 +206,7 @@
         
            <div class="talla3">
         <img src="hisabcal.png" alt="">
-        <a href="hisabcalculator.html"><button onclick="Android.showRewardedAd()">Hisabi Calc</button></a>
+        <button id="hisab">Hisabi Calc</button>
         </div>
          <div class="talla3">
         <img src="asararu.png" alt="">
@@ -283,6 +283,8 @@
       const adIframe = document.getElementById('adIframe');
       const closeAdButton = document.getElementById('closeAd');
 
+
+
       // Show the ad notification after 20 seconds
       setTimeout(() => {
         adsNotification.style.display = 'block';
@@ -300,8 +302,18 @@
         adsNotification.style.display = 'none';
           Android.showRewardedAd();
       });
+
+
+
     };
-       
+
+        const hisab = document.getElementById('hisab');
+        
+       hisab.addEventListener('click', function () {
+          
+         window.open("hisabcalculator.html");
+          Android.showRewardedAd();
+      });
 
 
     </script>
