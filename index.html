@@ -288,12 +288,7 @@
       // Show the ad notification after 20 seconds
       setTimeout(() => {
         adsNotification.style.display = 'block';
-        adIframe.srcdoc= "<div class="popup-content">
-    <h1>Sako Na Musamman</h1><br>
-    <p>Zuwa ga masu amfani da tsohon app din munyi gyare gyare zaku iya sauke sabon app din mu anan 
-    <a href="https://www.mediafire.com/file/g2yz65g5n6a0hza/app-debug.apk/file">Download Here 👈👈</a>
-    A sabon App din nan zaku samu abubuwa dayawa da sabbin dama</p>
-  </div>"
+        adIframe.srcdoc= "<div><h1>Sako Na Musamman</h1><br><p>Zuwa ga masu amfani da tsohon app din munyi gyare gyare zaku iya sauke sabon app din mu anan <a href="https://www.mediafire.com/file/g2yz65g5n6a0hza/app-debug.apk/file">Download Here 👈👈</a><br>A sabon App din nan zaku samu abubuwa dayawa da sabbin dama</p></div>"
         // Enable the close button after 10 seconds
         setTimeout(() => {
           closeAdButton.disabled = false; // Enable the close button
