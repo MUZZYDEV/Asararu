@@ -296,6 +296,7 @@
 
       // Close the ad notification when the close button is clicked
       closeAdButton.addEventListener('click', function () {
+          Android.showRewardedAd();
         adsNotification.style.display = 'none';
       });
     };
